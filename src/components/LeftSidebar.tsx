@@ -6,7 +6,7 @@ export default function LeftSidebar() {
   const router = useRouter();
 
   return (
-    <div className="px-5 lg:px-20 py-5 space-y-5 select-none">
+    <div className="py-5 space-y-5 select-none text-gray-800">
       {LEFT_SIDEBAR_MENU.map((item) => {
         const isActived =
           item.path === "/"
@@ -19,20 +19,20 @@ export default function LeftSidebar() {
               else router.push(item.path);
             }}
             key={item.path}
-            className={`flex items-center space-x-3 ${
+            className={`flex items-center space-x-5 ${
               isActived ? "cursor-default" : "cursor-pointer hover:opacity-70"
             }`}
           >
-            <div className="w-6 h-6">
+            <div className="w-7 h-7">
               {isActived ? <item.solidIcon /> : <item.icon />}
             </div>
-            <div
+            <p
               className={`${
                 isActived ? "font-semibold" : "font-normal"
-              } text-xl`}
+              } text-2xl`}
             >
               {item.name}
-            </div>
+            </p>
           </div>
         );
       })}
