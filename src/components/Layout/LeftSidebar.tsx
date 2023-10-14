@@ -15,6 +15,7 @@ export default function LeftSidebar() {
         return (
           <div
             onClick={() => {
+              //TODO: replace this with real wallet address
               if (item.path === "/profile") router.push(`/profile/${"0x123"}`);
               else router.push(item.path);
             }}
