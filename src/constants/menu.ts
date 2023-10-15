@@ -5,6 +5,13 @@ import {
 } from "@heroicons/react/24/solid";
 import { BellIcon, HomeIcon, UserIcon } from "@heroicons/react/24/outline";
 
+export const FEED_TYPE_MENU = {
+  All: {},
+  ApeCoin: {},
+  Compound: {},
+  Spark: {},
+};
+
 export const LEFT_SIDEBAR_MENU = [
   {
     name: "Home",
