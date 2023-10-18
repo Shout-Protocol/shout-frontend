@@ -13,6 +13,7 @@
     "@nextui-org/react": "^2.1.13",
     "@rainbow-me/rainbowkit": "^1.1.1",
     "@safe-global/auth-kit": "^1.2.1",
+    "@tableland/sdk": "^4.5.3-dev.0",
     "framer-motion": "^10.16.4",
     "next": "13.5.4",
     "react": "^18",
