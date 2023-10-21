@@ -1,5 +1,5 @@
 import { MappingWalletIconPath } from "@/configs/wallet.config";
-import { useCometh } from "@/hooks/cometh.hook";
+import { useProvider } from "@/hooks/provider.hook";
 import { useWalletStore } from "@/store/wallet/wallet.type";
 import { truncateAddress } from "@/utils/formatString";
 import {
@@ -8,15 +8,30 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
+import { formatEther } from "ethers/lib/utils";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function WalletProfile() {
   const { walletAddress, walletType } = useWalletStore();
-  const { signOut } = useCometh();
+  const { provider, disconnect } = useProvider();
   const [isClient, setIsClient] = useState(false);
+  const [balance, setBalance] = useState("0");
 
-  const handleSignOut = () => signOut();
+  const handleSignOut = () => disconnect();
+  useEffect(() => {
+    const getBalance = async () => {
+      if (provider) {
+        const rawBalance = await provider.getBalance(walletAddress);
+        const balance = formatEther(rawBalance);
+        return balance;
+      }
+      return "0";
+    };
+    getBalance().then((balance) => {
+      setBalance(balance);
+    });
+  }, [provider, walletAddress]);
 
   useEffect(() => {
     setIsClient(true);
@@ -34,7 +49,7 @@ export default function WalletProfile() {
                   width={20}
                   height={20}
                 />
-                <p className="text-xs font-semibold">0.123456</p>
+                <p className="text-xs font-semibold">{balance}</p>
               </div>
               <div className="bg-white border boder-[#EFEFEF] rounded-xl p-3 flex items-center">
                 <p className="text-xs font-semibold">
