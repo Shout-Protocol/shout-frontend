@@ -18,7 +18,7 @@ export default function CreatePostModal({ isOpen, onOpenChange }: IProps) {
   return (
     <Modal
       hideCloseButton={true}
-      size="3xl"
+      size="2xl"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
