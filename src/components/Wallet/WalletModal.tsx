@@ -14,6 +14,8 @@ import { WalletType } from "@/store/wallet/wallet.store";
 import { useCallback, useEffect, useState } from "react";
 import { useCometh } from "@/hooks/cometh.hook";
 import { useWalletStore } from "@/store/wallet/wallet.type";
+import { useProvider } from "@/hooks/provider.hook";
+import { useMetaMask } from "@/hooks/metamask.hook";
 
 interface IWalletModal {
   isOpen: boolean;
@@ -26,11 +28,8 @@ export default function WalletModal({ isOpen, onOpenChange }: IWalletModal) {
   const [walletAddressInput, setWalletAddressInput] = useState(
     walletAddress || ""
   );
-  const { signIn, signUp, isLoading, isSuccesss, setIsSuccess } = useCometh();
-
-  const handleSignIn = () => signIn(walletAddressInput as `0x${string}`);
-
-  const handleSignUp = () => signUp();
+  const { signIn, signUp, isSuccesss, setIsSuccess, isLoading } = useCometh();
+  const { connect } = useMetaMask();
 
   const walletContent = useCallback(
     (onClose: () => void) => {
@@ -39,7 +38,7 @@ export default function WalletModal({ isOpen, onOpenChange }: IWalletModal) {
           label: "Metamask",
           type: WalletType.metamask,
           icon: "/wallet/metamask.svg",
-          function: () => {},
+          function: () => connect(),
         },
         {
           label: "Safe",
@@ -83,7 +82,7 @@ export default function WalletModal({ isOpen, onOpenChange }: IWalletModal) {
               />
 
               <Button
-                onPress={() => handleSignIn()}
+                onPress={() => signIn(walletAddressInput as `0x${string}`)}
                 color="primary"
                 className="text-white font-semibold py-3"
                 disabled={isLoading}
@@ -96,7 +95,7 @@ export default function WalletModal({ isOpen, onOpenChange }: IWalletModal) {
                 <hr className="w-full" />
               </div>
               <Button
-                onPress={() => handleSignUp()}
+                onPress={() => signUp()}
                 className="bg-white border-1 border-[#EFEFEF] font-semibold py-3"
                 disabled={isLoading}
               >
@@ -131,7 +130,7 @@ export default function WalletModal({ isOpen, onOpenChange }: IWalletModal) {
           </>
         );
     },
-    [isCometh, walletAddressInput, isLoading]
+    [isCometh, walletAddressInput, isLoading, signIn, signUp]
   );
 
   useEffect(() => {
