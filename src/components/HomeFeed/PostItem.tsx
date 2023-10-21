@@ -8,7 +8,7 @@ import React from "react";
 import { Button } from "@nextui-org/react";
 import BoostPost from "../BoostPost/BoostPost";
 
-export default function FeedPost() {
+export default function PostItem() {
   return (
     <>
       <div className="p-3 pt-0.5">

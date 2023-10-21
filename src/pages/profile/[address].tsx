@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Avatar } from "@nextui-org/react";
 import { truncateAddress } from "@/utils/formatString";
-import FeedPost from "@/components/HomeFeed/FeedPost";
+import PostItem from "@/components/HomeFeed/PostItem";
 
 export default function Profile() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function Profile() {
         </div>
       </div>
       <div className="mt-3">
-        <FeedPost />
+        <PostItem />
       </div>
     </>
   );
