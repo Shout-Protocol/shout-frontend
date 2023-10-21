@@ -7,9 +7,9 @@ import { BellIcon, HomeIcon, UserIcon } from "@heroicons/react/24/outline";
 
 export const FEED_TYPE_MENU = {
   All: {},
-  ApeCoin: {},
-  Compound: {},
   Spark: {},
+  Ape: {},
+  FileCoin: {},
 };
 
 export const LEFT_SIDEBAR_MENU = [

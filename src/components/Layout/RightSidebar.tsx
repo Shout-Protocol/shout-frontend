@@ -4,37 +4,37 @@ import RankItem from "../RankItem";
 
 const mockRankData = [
   {
-    rank: 1,
-    name: "Shout Protocol",
+    name: "@satosheep",
     address: "0x12fc5171bcb1acFF92D94f2a99bd394C613FAf58",
     value: 1900,
+    symbol: "sDAI",
   },
   {
-    rank: 2,
-    name: "ETH Global",
+    name: "@sainytk",
     address: "0x12fc5171bcb1acFF92D94f2a99bd394C613FAf58",
     value: 1200,
+    symbol: "sDAI",
   },
   {
-    rank: 3,
-    name: "Spark",
+    name: "@ribbinpo",
     address: "0x12fc5171bcb1acFF92D94f2a99bd394C613FAf58",
     value: 1000,
+    symbol: "sDAI",
   },
 ];
 
 export default function RightSidebar() {
   return (
-    <div className="py-5 px-7 pr-24">
+    <div className="sticky top-5">
       <div className="flex items-center">
         <div className="bg-pink-100 p-1 rounded">
           <ChartBarIcon className="text-pink-400 w-5 h-5" />
         </div>
-        <p className="font-semibold ml-1.5">Top Staking by Protocol</p>
+        <p className="font-semibold ml-1.5">Top Staking by Protocols</p>
       </div>
       <div className="mt-3 w-full px-3 space-y-2">
         {mockRankData.map((item, index) => (
-          <RankItem key={index} {...item} />
+          <RankItem key={index} rank={index + 1} {...item} />
         ))}
       </div>
     </div>

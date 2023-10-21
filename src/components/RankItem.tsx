@@ -6,6 +6,7 @@ interface IProps {
   name: string;
   address: string;
   value: number;
+  symbol: string;
 }
 
 export default function RankItem(props: IProps) {
@@ -18,7 +19,9 @@ export default function RankItem(props: IProps) {
           {truncateAddress(props.address)}
         </div>
       </div>
-      <div className="ml-auto font-medium">${props.value}</div>
+      <div className="ml-auto font-medium">
+        {props.value} {props.symbol}
+      </div>
     </div>
   );
 }
