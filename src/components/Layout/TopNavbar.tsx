@@ -6,7 +6,6 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import Image from "next/image";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/router";
 
 export default function TopNavbar() {
@@ -27,7 +26,7 @@ export default function TopNavbar() {
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
-          <ConnectButton />
+          <p>Add Connect Wallet Button Here</p>
         </NavbarItem>
       </NavbarContent>
     </Navbar>

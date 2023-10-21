@@ -3,6 +3,7 @@ import {
   ChatBubbleBottomCenterIcon,
 } from "@heroicons/react/24/outline";
 import { Avatar } from "@nextui-org/react";
+import Image from "next/image";
 import React from "react";
 
 export default function FeedPost() {
@@ -20,6 +21,16 @@ export default function FeedPost() {
           </div>
         </div>
         <p className="my-2">Hello, World !</p>
+        <div className="w-full h-[500px] relative">
+          <Image
+            className="rounded-md"
+            alt="thumbnail"
+            src={
+              "https://res.cloudinary.com/daily-now/image/upload/f_auto/v1/placeholders/3"
+            }
+            layout="fill"
+          />
+        </div>
         <div className="flex items-center mt-3">
           <HeartIcon className="w-7" />
           <p>0</p>

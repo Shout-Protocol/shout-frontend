@@ -2,6 +2,7 @@ import React from "react";
 import TopNavbar from "./TopNavbar";
 import { Inter } from "next/font/google";
 import LeftSidebar from "./LeftSidebar";
+import RightSidebar from "./RightSidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function MainLayout({
           <p className="mt-auto text-gray-500 text-sm">© 2023 Shout Protocol</p>
         </div>
         <div className="col-span-3 h-full">{children}</div>
-        <div className="col-span-2 h-full border-l"></div>
+        <div className="col-span-2 h-full border-l">
+          <RightSidebar />
+        </div>
       </div>
     </main>
   );
