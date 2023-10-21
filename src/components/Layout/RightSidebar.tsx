@@ -25,7 +25,7 @@ const mockRankData = [
 
 export default function RightSidebar() {
   return (
-    <div className="py-5 px-7">
+    <div className="py-5 px-7 pr-24">
       <div className="flex items-center">
         <div className="bg-pink-100 p-1 rounded">
           <ChartBarIcon className="text-pink-400 w-5 h-5" />

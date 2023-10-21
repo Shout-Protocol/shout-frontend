@@ -6,7 +6,7 @@ export default function LeftSidebar() {
   const router = useRouter();
 
   return (
-    <div className="py-5 space-y-5 select-none text-gray-800">
+    <div className="py-5 space-y-5 select-none text-gray-800 w-full">
       {LEFT_SIDEBAR_MENU.map((item) => {
         const isActived =
           item.path === "/"
