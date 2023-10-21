@@ -14,13 +14,13 @@ export default function MainLayout({
   return (
     <main className={`${inter.className} custom-light flex flex-col h-screen`}>
       <TopNavbar />
-      <div className="grid grid-cols-7 flex-1">
-        <div className="col-span-2 h-full border-r px-5 lg:px-24 flex flex-col pb-10">
+      <div className="grid grid-cols-12 flex-1">
+        <div className="col-span-3 h-full border-r pl-5 lg:pl-28 flex flex-col pb-10">
           <LeftSidebar />
           <p className="mt-auto text-gray-500 text-sm">© 2023 Shout Protocol</p>
         </div>
-        <div className="col-span-3 h-full">{children}</div>
-        <div className="col-span-2 h-full border-l">
+        <div className="col-span-5 h-full">{children}</div>
+        <div className="col-span-4 h-full border-l">
           <RightSidebar />
         </div>
       </div>

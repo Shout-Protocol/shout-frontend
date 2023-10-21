@@ -7,6 +7,7 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import CreateProfileButton from "../Profile/CreateProfileButton";
 
 export default function TopNavbar() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function TopNavbar() {
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
-          <p>Add Connect Wallet Button Here</p>
+          <CreateProfileButton />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
