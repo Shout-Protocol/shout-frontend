@@ -1,4 +1,4 @@
-import { MappingWalletIconPath } from "@/configs/wallet.config";
+import { mappingWalletIconPath } from "@/configs/wallet.config";
 import { useProvider } from "@/hooks/provider.hook";
 import { useWalletStore } from "@/store/wallet/wallet.type";
 import { formatDecimal } from "@/utils/formatNumber";
@@ -45,7 +45,7 @@ export default function WalletProfile() {
             <div className="flex border border-[#EFEFEF] rounded-xl bg-[#F7F9F9]">
               <div className="p-3 flex items-center space-x-2">
                 <Image
-                  src={MappingWalletIconPath(walletType)}
+                  src={mappingWalletIconPath(walletType)}
                   alt="safe"
                   width={20}
                   height={20}

@@ -9,7 +9,8 @@ export const useCometh = () => {
     useContext(ComethContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccesss, setIsSuccess] = useState(false);
-  const { setWalletAddress, setWalletType } = useWalletStore();
+  const { setWalletAddress, setWalletType, setCurrentChainId } =
+    useWalletStore();
 
   const comethConnect = async (walletAddress?: `0x${string}`) => {
     try {
@@ -27,6 +28,7 @@ export const useCometh = () => {
         setWalletAddress(instance.getAddress());
         setWalletType(WalletType.cometh);
         setIsSuccess(true);
+        setCurrentChainId("0x13881");
       }
       setIsLoading(false);
     } catch (e) {
@@ -50,6 +52,7 @@ export const useCometh = () => {
         setInstance(instance);
         setInstanceProvider(instanceProvider);
         setIsSuccess(false);
+        setCurrentChainId("");
       }
       setIsLoading(false);
     } catch (e) {

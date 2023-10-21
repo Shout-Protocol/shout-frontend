@@ -6,7 +6,8 @@ import { useEffect, useMemo, useState } from "react";
 
 export const useMetaMask = () => {
   const { sdk, connected, connecting, provider: publicProvider } = useSDK();
-  const { setWalletAddress, setWalletType } = useWalletStore();
+  const { setWalletAddress, setWalletType, setCurrentChainId, walletType } =
+    useWalletStore();
   const [provider, setProvider] = useState<ethers.providers.Web3Provider>();
   const [chainId, setChainId] = useState<string>();
 
@@ -30,25 +31,43 @@ export const useMetaMask = () => {
       // setProvider(undefined);
       setWalletType(WalletType.none);
       setWalletAddress("");
+      setCurrentChainId("");
     } catch (e) {
       console.warn("Failed to disconnect:", e);
     }
   };
 
+  const changeChain = async (chainId: string) => {
+    try {
+      if (window.ethereum) {
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: chainId }],
+        });
+      }
+    } catch (e) {
+      console.warn("Failed to change chain:", e);
+    }
+  };
+
   useEffect(() => {
-    if (window.ethereum) {
+    if (window.ethereum && walletType === WalletType.metamask) {
       const chainId = window.ethereum.chainId;
       setChainId(chainId || "");
+      setCurrentChainId(chainId || "");
     }
-    const _provider = new ethers.providers.Web3Provider(
-      publicProvider as any
-    );
-    setProvider(_provider);
-  }, [publicProvider, connected]);
+    if (publicProvider) {
+      const _provider = new ethers.providers.Web3Provider(
+        publicProvider as any
+      );
+      setProvider(_provider);
+    }
+  }, [publicProvider, connected, setCurrentChainId, walletType]);
 
   return {
     connect,
     disconnect,
+    changeChain,
     connecting,
     connected,
     provider,

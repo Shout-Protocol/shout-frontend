@@ -8,8 +8,9 @@ export enum WalletType {
 export interface IWalletState {
   walletType: WalletType;
   walletAddress: string;
-  currentChain: string;
+  currentChainId: string;
 
   setWalletType: (walletType: WalletType) => void;
   setWalletAddress: (walletAddress: string) => void;
+  setCurrentChainId: (currentChain: string) => void;
 }

@@ -1,6 +1,6 @@
 import { WalletType } from "@/store/wallet/wallet.store";
 
-export const MappingWalletIconPath = (walletType: WalletType) => {
+export const mappingWalletIconPath = (walletType: WalletType) => {
   switch (walletType) {
     case WalletType.cometh:
       return "/wallet/cometh.svg";

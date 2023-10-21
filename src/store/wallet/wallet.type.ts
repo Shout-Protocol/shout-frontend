@@ -7,14 +7,16 @@ export const useWalletStore = create(
     (set, get) => ({
       walletType: WalletType.none,
       walletAddress: "",
-      currentChain: "",
-
+      currentChainId: "",
       setWalletType: (walletType: WalletType) => {
         set({ walletType });
       },
       setWalletAddress: (walletAddress: string) => {
         set({ walletAddress });
-      }
+      },
+      setCurrentChainId: (currentChainId: string) => {
+        set({ currentChainId });
+      },
     }),
     {
       name: "wallet-store",

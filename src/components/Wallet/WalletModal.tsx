@@ -130,7 +130,7 @@ export default function WalletModal({ isOpen, onOpenChange }: IWalletModal) {
           </>
         );
     },
-    [isCometh, walletAddressInput, isLoading, signIn, signUp]
+    [isCometh, walletAddressInput, isLoading, connect, signIn, signUp]
   );
 
   useEffect(() => {
