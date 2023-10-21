@@ -7,14 +7,18 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import CreateProfileButton from "../Profile/CreateProfileButton";
 import WalletConnect from "../Wallet";
+import CreateProfile from "../Profile/CreateProfile";
 
 export default function TopNavbar() {
   const router = useRouter();
 
   return (
-    <Navbar maxWidth="full" className="px-0 lg:px-20 border-b py-1.5">
+    <Navbar
+      shouldHideOnScroll={true}
+      maxWidth="full"
+      className="py-1.5 max-w-[1200px] "
+    >
       <NavbarBrand>
         <div
           onClick={() => router.push("/")}
@@ -28,10 +32,10 @@ export default function TopNavbar() {
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
-          <WalletConnect />
+          <CreateProfile />
         </NavbarItem>
         <NavbarItem>
-          <CreateProfileButton />
+          <WalletConnect />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
