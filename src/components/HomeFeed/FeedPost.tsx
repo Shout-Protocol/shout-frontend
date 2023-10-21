@@ -6,6 +6,7 @@ import { Avatar } from "@nextui-org/react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "@nextui-org/react";
+import BoostPost from "../BoostPost/BoostPost";
 
 export default function FeedPost() {
   return (
@@ -46,9 +47,7 @@ export default function FeedPost() {
             <p className="text-xs text-gray-500 bg-gray-100 p-[7.5px] rounded">
               Spark : 100
             </p>
-            <Button size="sm" color="primary">
-              Boost
-            </Button>
+            <BoostPost />
           </div>
         </div>
         <hr className="mt-2" />

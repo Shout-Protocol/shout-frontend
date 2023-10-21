@@ -7,7 +7,7 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import CreateProfileButton from "../Profile/CreateProfileButton";
+import CreateProfile from "../Profile/CreateProfile";
 
 export default function TopNavbar() {
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function TopNavbar() {
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
-          <CreateProfileButton />
+          <CreateProfile />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
