@@ -4,11 +4,15 @@ import { UserPlusIcon } from "@heroicons/react/24/solid";
 import CreateProfileModal from "./CreateProfileModal";
 
 export default function CreateProfile() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   return (
     <>
-      <CreateProfileModal isOpen={isOpen} onOpenChange={onOpenChange} />
+      <CreateProfileModal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        onClose={onClose}
+      />
       <Button
         onClick={onOpen}
         variant="bordered"
