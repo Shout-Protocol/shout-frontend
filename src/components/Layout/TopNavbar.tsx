@@ -13,7 +13,7 @@ export default function TopNavbar() {
   const router = useRouter();
 
   return (
-    <Navbar maxWidth="full" className="px-0 lg:px-20 border-b py-1.5">
+    <Navbar maxWidth="full" className="py-1.5 max-w-[1200px]">
       <NavbarBrand>
         <div
           onClick={() => router.push("/")}

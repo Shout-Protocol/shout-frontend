@@ -12,15 +12,17 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className={`${inter.className} custom-light flex flex-col h-screen`}>
+    <main
+      className={`${inter.className} custom-light flex flex-col h-screen w-full items-center`}
+    >
       <TopNavbar />
-      <div className="grid grid-cols-12 flex-1">
-        <div className="col-span-3 h-full border-r pl-5 lg:pl-28 flex flex-col pb-10">
+      <div className="border-b w-full" />
+      <div className="grid grid-cols-12 flex-1 w-full max-w-[1200px]">
+        <div className="col-span-3 h-full border-r py-5 px-7">
           <LeftSidebar />
-          <p className="mt-auto text-gray-500 text-sm">© 2023 Shout Protocol</p>
         </div>
         <div className="col-span-5 h-full">{children}</div>
-        <div className="col-span-4 h-full border-l">
+        <div className="col-span-4 h-full border-l py-5 px-7">
           <RightSidebar />
         </div>
       </div>
