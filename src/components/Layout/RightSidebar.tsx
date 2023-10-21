@@ -5,19 +5,19 @@ import RankItem from "../RankItem";
 const mockRankData = [
   {
     rank: 1,
-    name: "Shout Protocol",
+    name: "Spark Protocol",
     address: "0x12fc5171bcb1acFF92D94f2a99bd394C613FAf58",
     value: 1900,
   },
   {
     rank: 2,
-    name: "ETH Global",
+    name: "Ape Coin",
     address: "0x12fc5171bcb1acFF92D94f2a99bd394C613FAf58",
     value: 1200,
   },
   {
     rank: 3,
-    name: "Spark",
+    name: "Filecoin Network",
     address: "0x12fc5171bcb1acFF92D94f2a99bd394C613FAf58",
     value: 1000,
   },
