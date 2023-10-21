@@ -13,7 +13,11 @@ export default function TopNavbar() {
   const router = useRouter();
 
   return (
-    <Navbar maxWidth="full" className="py-1.5 max-w-[1200px]">
+    <Navbar
+      shouldHideOnScroll={true}
+      maxWidth="full"
+      className="py-1.5 max-w-[1200px] "
+    >
       <NavbarBrand>
         <div
           onClick={() => router.push("/")}

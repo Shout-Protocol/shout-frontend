@@ -6,7 +6,7 @@ export default function LeftSidebar() {
   const router = useRouter();
 
   return (
-    <>
+    <div className="sticky top-5">
       <div className="flex flex-col pb-10  space-y-5 select-none text-gray-800 w-full">
         {LEFT_SIDEBAR_MENU.map((item) => {
           const isActived =
@@ -43,6 +43,6 @@ export default function LeftSidebar() {
         })}
       </div>
       <p className="text-gray-500 text-sm">© 2023 Shout Protocol</p>
-    </>
+    </div>
   );
 }
