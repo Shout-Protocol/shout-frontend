@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import CreateProfileButton from "../Profile/CreateProfileButton";
+import WalletConnect from "../Wallet";
 
 export default function TopNavbar() {
   const router = useRouter();
@@ -26,6 +27,9 @@ export default function TopNavbar() {
         </div>
       </NavbarBrand>
       <NavbarContent justify="end">
+        <NavbarItem>
+          <WalletConnect />
+        </NavbarItem>
         <NavbarItem>
           <CreateProfileButton />
         </NavbarItem>
