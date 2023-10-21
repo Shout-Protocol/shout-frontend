@@ -9,7 +9,6 @@ export default function PostFeed() {
 
   return (
     <div>
-      <CreatePost />
       <FeedSelector
         selected={feedType}
         setSelected={setFeedType}
