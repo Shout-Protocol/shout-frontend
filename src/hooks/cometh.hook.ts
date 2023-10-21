@@ -1,6 +1,6 @@
 import { ComethContext } from "@/contexts/cometh.context";
-import { WalletType } from "@/store/wallet/wallet.store";
-import { useWalletStore } from "@/store/wallet/wallet.type";
+import { WalletType } from "@/store/wallet/wallet.type";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 import { ComethProvider } from "@cometh/connect-sdk";
 import { useContext, useState } from "react";
 

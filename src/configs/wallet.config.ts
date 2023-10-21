@@ -1,4 +1,4 @@
-import { WalletType } from "@/store/wallet/wallet.store";
+import { WalletType } from "@/store/wallet/wallet.type";
 
 export const mappingWalletIconPath = (walletType: WalletType) => {
   switch (walletType) {

@@ -10,10 +10,10 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import WalletSelector from "./WalletSelector";
-import { WalletType } from "@/store/wallet/wallet.store";
+import { WalletType } from "@/store/wallet/wallet.type";
 import { useCallback, useEffect, useState } from "react";
 import { useCometh } from "@/hooks/cometh.hook";
-import { useWalletStore } from "@/store/wallet/wallet.type";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 import { useProvider } from "@/hooks/provider.hook";
 import { useMetaMask } from "@/hooks/metamask.hook";
 

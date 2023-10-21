@@ -1,4 +1,4 @@
-import { WalletType } from "@/store/wallet/wallet.store";
+import { WalletType } from "@/store/wallet/wallet.type";
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
 
@@ -12,7 +12,10 @@ interface IWalletSelector {
   onClose: () => void;
 }
 
-export default function WalletSelector({ walletList, onClose }: IWalletSelector) {
+export default function WalletSelector({
+  walletList,
+  onClose,
+}: IWalletSelector) {
   return walletList.map((wallet, key) => {
     return (
       <Button

@@ -1,5 +1,5 @@
-import { WalletType } from "@/store/wallet/wallet.store";
-import { useWalletStore } from "@/store/wallet/wallet.type";
+import { WalletType } from "@/store/wallet/wallet.type";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 import { useSDK } from "@metamask/sdk-react";
 import { ethers } from "ethers";
 import { useEffect, useMemo, useState } from "react";

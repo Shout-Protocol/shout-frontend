@@ -1,6 +1,6 @@
 import { mappingWalletIconPath } from "@/configs/wallet.config";
 import { useProvider } from "@/hooks/provider.hook";
-import { useWalletStore } from "@/store/wallet/wallet.type";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 import { formatDecimal } from "@/utils/formatNumber";
 import { truncateAddress } from "@/utils/formatString";
 import {
@@ -50,7 +50,9 @@ export default function WalletProfile() {
                   width={20}
                   height={20}
                 />
-                <p className="text-xs font-semibold">{formatDecimal(+balance)}</p>
+                <p className="text-xs font-semibold">
+                  {formatDecimal(+balance)}
+                </p>
               </div>
               <div className="bg-white border boder-[#EFEFEF] rounded-xl p-3 flex items-center">
                 <p className="text-xs font-semibold">
