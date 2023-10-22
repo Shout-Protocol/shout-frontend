@@ -8,7 +8,7 @@ export default function WithdrawBoost() {
   return (
     <>
       <WithdrawBoostModal isOpen={isOpen} onOpenChange={onOpenChange} />
-      <Button onClick={onOpen} size="sm" color="secondary">
+      <Button onClick={onOpen} size="sm" color="primary" variant="bordered">
         Withdraw
       </Button>
     </>

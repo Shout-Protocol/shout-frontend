@@ -5,7 +5,6 @@ import {
 import { Avatar } from "@nextui-org/react";
 import Image from "next/image";
 import React from "react";
-import { Button } from "@nextui-org/react";
 import BoostPost from "../BoostPost/BoostPost";
 import WithdrawBoost from "../BoostPost/WithdrawBoost";
 

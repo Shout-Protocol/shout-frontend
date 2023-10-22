@@ -57,6 +57,7 @@ export default function BoostPostModal({ isOpen, onOpenChange }: IProps) {
             </ModalHeader>
             <ModalBody>
               <BoostSelector
+                label="Choose a protocol to boost with:"
                 selectedProtocol={selectedProtocol}
                 setSelectedProtocol={setSelectedProtocol}
                 protocols={mockProtocols}
