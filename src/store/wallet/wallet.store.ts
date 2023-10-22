@@ -8,6 +8,15 @@ export const useWalletStore = create(
       walletType: WalletType.none,
       walletAddress: "",
       currentChainId: "",
+      ownerId: "",
+      resetState: () => {
+        set({
+          walletType: WalletType.none,
+          walletAddress: "",
+          currentChainId: "",
+          ownerId: "",
+        });
+      },
       setWalletType: (walletType: WalletType) => {
         set({ walletType });
       },
@@ -16,6 +25,9 @@ export const useWalletStore = create(
       },
       setCurrentChainId: (currentChainId: string) => {
         set({ currentChainId });
+      },
+      setOwnerId: (ownerId: string) => {
+        set({ ownerId });
       },
     }),
     {

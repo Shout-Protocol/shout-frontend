@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -7,16 +7,33 @@ import {
   ModalFooter,
   Button,
   Input,
+  Spinner,
 } from "@nextui-org/react";
 import { PhotoIcon } from "@heroicons/react/24/solid";
+import { useMutation } from "@apollo/client";
+import { useWalletStore } from "@/store/wallet/wallet.store";
+import { CREATE_USER } from "@/gql/user.query";
 
 interface IProps {
   isOpen: boolean;
   onOpenChange: (value: boolean) => void;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
-export default function CreateProfileModal({ isOpen, onOpenChange }: IProps) {
+export default function CreateProfileModal({
+  isOpen,
+  onOpenChange,
+  onClose,
+}: IProps) {
+  const { walletAddress } = useWalletStore();
+  const [username, setUsername] = useState("");
+  const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
+
+  const handleCreateProfile = async () => {
+    await createUser({ variables: { walletAddress, name: username } });
+    onClose();
+  };
+
   return (
     <Modal
       hideCloseButton={true}
@@ -38,8 +55,10 @@ export default function CreateProfileModal({ isOpen, onOpenChange }: IProps) {
                 <div className="my-5">
                   <p className="mb-1 text-gray-600">@Username</p>
                   <Input
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     size={"lg"}
-                    type="number"
+                    type="text"
                     placeholder="Enter your username"
                   />
                 </div>
@@ -47,8 +66,8 @@ export default function CreateProfileModal({ isOpen, onOpenChange }: IProps) {
             </ModalBody>
             <ModalFooter className="border-t flex justify-between items-center">
               <div className="flex items-center w-full justify-end">
-                <Button fullWidth color="primary">
-                  Create
+                <Button onClick={handleCreateProfile} fullWidth color="primary">
+                  {loading ? <Spinner /> : "Create Profile"}
                 </Button>
               </div>
             </ModalFooter>

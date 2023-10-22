@@ -1,9 +1,11 @@
 import { LEFT_SIDEBAR_MENU } from "@/constants/menu";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 import { useRouter } from "next/router";
 import React from "react";
 
 export default function LeftSidebar() {
   const router = useRouter();
+  const { walletAddress } = useWalletStore();
 
   return (
     <div className="sticky top-5">
@@ -18,9 +20,7 @@ export default function LeftSidebar() {
               onClick={() => {
                 //TODO: replace this with real wallet address
                 if (item.path === "/profile")
-                  router.push(
-                    `/profile/${"0x12fc5171bcb1acFF92D94f2a99bd394C613FAf58"}`
-                  );
+                  router.push(`/profile/${walletAddress || "0x"}`);
                 else router.push(item.path);
               }}
               key={item.path}
