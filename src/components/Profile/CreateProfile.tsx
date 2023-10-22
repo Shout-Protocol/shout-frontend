@@ -41,7 +41,7 @@ export default function CreateProfile() {
       />
       {walletAddress && (
         <Button
-          disabled={loading || Boolean(data?.profile.name)}
+          disabled={loading || Boolean(data?.profile)}
           onClick={handleOpen}
           variant="bordered"
           startContent={loading ? null : <UserPlusIcon />}
