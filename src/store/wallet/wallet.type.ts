@@ -15,4 +15,5 @@ export interface IWalletState {
   setWalletType: (walletType: WalletType) => void;
   setWalletAddress: (walletAddress: string) => void;
   setCurrentChainId: (currentChain: string) => void;
+  resetState: () => void;
 }

@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@cometh/connect-sdk": "^1.1.2",
     "@apollo/client": "^3.8.6",
+    "@cometh/connect-sdk": "^1.1.2",
     "@heroicons/react": "^2.0.18",
     "@metamask/sdk-react": "^0.10.0",
     "@nextui-org/react": "^2.1.13",
@@ -24,6 +24,7 @@
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
+    "web3.storage": "^4.5.5",
     "zustand": "^4.4.3"
   },
   "devDependencies": {

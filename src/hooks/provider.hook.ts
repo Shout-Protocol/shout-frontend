@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { useMetaMask } from "./metamask.hook";
 
 export const useProvider = () => {
-  const { walletType } = useWalletStore();
+  const { walletType, resetState } = useWalletStore();
   const {
     comethProvider,
     signOut: comethSignOut,
@@ -22,12 +22,18 @@ export const useProvider = () => {
       case WalletType.cometh:
         return {
           provider: comethProvider,
-          disconnect: comethSignOut,
+          disconnect: () => {
+            comethSignOut();
+            resetState();
+          },
         };
       case WalletType.metamask:
         return {
           provider: metaMaskProvider,
-          disconnect: metaMaskDisconnect,
+          disconnect: () => {
+            metaMaskDisconnect();
+            resetState();
+          },
         };
       default:
         return { provider: null, disconnect: () => {} };
