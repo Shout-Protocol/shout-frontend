@@ -2,8 +2,14 @@ import { gql } from "@apollo/client";
 
 export const CREATE_POST = gql(`
   mutation CreatePost($ipfsHash: String!, $ownerId: ID!) {
-    createPost(ipfsHash: $ipfsHash, ownerId: $ownerId) {
-        _id
+    createPost(
+      post: {
+        ipfsHash: $ipfsHash
+        chainId: "0x5"
+        ownerId: $ownerId
+      }
+    ){
+      _id
     }
   }
 `);

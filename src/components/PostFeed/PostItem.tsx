@@ -16,7 +16,13 @@ import { useWalletStore } from "@/store/wallet/wallet.store";
 const DEFAULT_IMG_URL =
   "https://res.cloudinary.com/daily-now/image/upload/f_auto/v1/placeholders/3";
 
-export default function PostItem({ data }: { data: Post }) {
+export default function PostItem({
+  data,
+  hideHeader = false,
+}: {
+  data: Post;
+  hideHeader?: boolean;
+}) {
   const [imageUrl, setImageUrl] = useState(DEFAULT_IMG_URL);
   const [description, setDescription] = useState("");
   const router = useRouter();
@@ -49,29 +55,33 @@ export default function PostItem({ data }: { data: Post }) {
   return (
     <>
       <div className="p-3 pt-0.5">
-        <div className="flex items-center">
-          <Avatar
-            onClick={() => router.push(`/profile/${data.owner?.walletAddress}`)}
-            className="mr-2 text-white bg-gray-300 w-10 h-10 cursor-pointer"
-          />
-          <div className="flex flex-col">
-            <div className="flex items-center">
-              <p className="text-gray-500">1h</p>
-              <p
-                onClick={() =>
-                  router.push(`/profile/${data.owner?.walletAddress}`)
-                }
-                className="text-gray-500 ml-2  cursor-pointer"
-              >
-                @{data.owner?.name}
-              </p>
+        {hideHeader ? null : (
+          <div className="flex items-center mb-2">
+            <Avatar
+              onClick={() =>
+                router.push(`/profile/${data.owner?.walletAddress}`)
+              }
+              className="mr-2 text-white bg-gray-300 w-10 h-10 cursor-pointer"
+            />
+            <div className="flex flex-col">
+              <div className="flex items-center">
+                <p className="text-gray-500">1h</p>
+                <p
+                  onClick={() =>
+                    router.push(`/profile/${data.owner?.walletAddress}`)
+                  }
+                  className="text-gray-500 ml-2  cursor-pointer"
+                >
+                  @{data.owner?.name}
+                </p>
+              </div>
+              <h1 className="font-semibold text-md">
+                {truncateAddress(data.owner?.walletAddress as string)}
+              </h1>
             </div>
-            <h1 className="font-semibold text-md">
-              {truncateAddress(data.owner?.walletAddress as string)}
-            </h1>
           </div>
-        </div>
-        <p className="my-2">{description}</p>
+        )}
+        <p className="-mt-1 mb-1">{description}</p>
         <div className="w-full h- relative">
           <Image
             src={imageUrl}
@@ -91,15 +101,15 @@ export default function PostItem({ data }: { data: Post }) {
           </div>
           <div className="flex items-center space-x-2">
             <p className="text-xs text-gray-500 bg-gray-100 p-[7.5px] rounded">
-              FileCoin : 50
+              FileCoin : 0
             </p>
             <p className="text-xs text-gray-500 bg-gray-100 p-[7.5px] rounded">
-              Spark : 100
+              Spark : 0
             </p>
             {data.ownerId === ownerId && (
               <div className="flex items-center space-x-1.5">
                 <WithdrawBoost />
-                <BoostPost />
+                <BoostPost ipfsHash={data.ipfsHash} />
               </div>
             )}
           </div>

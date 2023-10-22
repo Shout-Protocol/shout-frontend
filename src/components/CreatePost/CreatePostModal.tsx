@@ -55,6 +55,7 @@ export default function CreatePostModal({
     setIsLoading(true);
 
     const uri = await nftStorageUpload(file!, ownerId, content);
+    console.log({ ipfsHash: uri.ipnft, ownerId });
     await createPost({ variables: { ipfsHash: uri.ipnft, ownerId } });
     toast.success("Post created successfully");
 

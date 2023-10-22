@@ -1,22 +1,23 @@
-import { ERC20_ABI } from "@/constants/abis/erc20.abi";
+import { SHOUTER_ABI } from "@/constants/abis/shouter.abi";
+import { CONTRACT_ADDRESS } from "@/constants/address.constant";
 import { ethers } from "ethers";
 
 const shouterContract = (
   contractAddress: string,
   provider: ethers.Signer | ethers.providers.Provider
 ) => {
-  return new ethers.Contract(contractAddress, ERC20_ABI, provider);
+  return new ethers.Contract(contractAddress, SHOUTER_ABI, provider);
 };
 
 const createAndBoostPost = async (
   contractAddress: string,
   provider: ethers.Signer | ethers.providers.Provider,
-  _ipfsHash: string,
-  _yieldVaultId: number | ethers.BigNumber,
-  _amount: number | ethers.BigNumber
+  ipfsHash: string,
+  yieldVaultId: number | ethers.BigNumber,
+  amount: number | ethers.BigNumber
 ) => {
   const contract = shouterContract(contractAddress, provider);
-  const tx = await contract.createAndBoostPost();
+  const tx = await contract.createAndBoostPost(ipfsHash, yieldVaultId, amount);
   await tx.wait();
   return tx;
 };
