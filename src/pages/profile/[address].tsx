@@ -47,9 +47,9 @@ export default function Profile() {
       </div>
       <div className="mt-3">
         {/* {FIXME:data can't be use properly.} */}
-        {/* {data?.profile.post?.map((item) => (
-          <PostItem key={item!._id} data={item!} />
-        ))} */}
+        {data?.profile.post?.map((item) => (
+          <PostItem key={item!._id} data={item!} hideHeader={true} />
+        ))}
       </div>
     </>
   );
