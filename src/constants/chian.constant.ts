@@ -12,6 +12,19 @@ export const CHAINS = {
     blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
   },
 
+  "0x44d": {
+    chainId: "0x44d",
+    rpcUrls: ["https://polygon-zkevm.drpc.org"],
+    chainName: "Polygon zkEVM",
+    iconPath: "/chain/polygon.png",
+    nativeCurrency: {
+      name: "Ethereum",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    blockExplorerUrls: ["https://zkevm.polygonscan.com/"],
+  },
+
   "0x5": {
     chainId: "0x5",
     rpcUrls: ["https://eth-goerli.api.onfinality.io/public"],
