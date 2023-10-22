@@ -7,13 +7,22 @@ import { GET_POSTS } from "@/gql/post.query";
 import { Post } from "../../../types/shoutGQL";
 import { Spinner } from "@nextui-org/react";
 
+const reverseFeed = (array: any[]) => {
+  let newArray = [];
+
+  for (let i = array.length - 1; i >= 0; i--) {
+    newArray.push(array[i]);
+  }
+  return newArray;
+};
+
 export default function PostFeed() {
   const [feedType, setFeedType] = useState<keyof typeof FEED_TYPE_MENU>("All");
   const { loading, error, data } = useQuery<{ posts: Post[] }>(GET_POSTS, {
     pollInterval: 1500,
   });
 
-  if (loading)
+  if (loading || data === undefined)
     return (
       <div className="flex w-full items-center justify-center h-[200px] ">
         <Spinner />
@@ -27,7 +36,7 @@ export default function PostFeed() {
         setSelected={setFeedType}
         feedType={Object.keys(FEED_TYPE_MENU)}
       />
-      {data?.posts.map((item) => (
+      {reverseFeed(data.posts).map((item) => (
         <PostItem key={item._id} data={item} />
       ))}
     </div>
