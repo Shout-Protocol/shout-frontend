@@ -5,11 +5,10 @@ import LoginNotice from "../LoginNotice";
 import { useWalletStore } from "@/store/wallet/wallet.store";
 
 export default function CreatePost() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const { ownerId } = useWalletStore();
 
-  if (!ownerId)
+  if (ownerId === "")
     return (
       <div className="pt-3 px-4">
         <LoginNotice />
@@ -18,7 +17,11 @@ export default function CreatePost() {
 
   return (
     <div className="w-full flex flex-col p-3">
-      <CreatePostModal isOpen={isOpen} onOpenChange={onOpenChange} />
+      <CreatePostModal
+        onClose={onClose}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      />
       <p className="font-semibold text-xl">Create a Post</p>
       <div className="flex mt-3">
         <Avatar className="mr-3 text-white bg-gray-300 w-11" />
