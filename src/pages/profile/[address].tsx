@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Avatar } from "@nextui-org/react";
 import { truncateAddress } from "@/utils/formatString";
-import PostItem from "@/components/HomeFeed/PostItem";
+import PostItem from "@/components/PostFeed/PostItem";
 
 export default function Profile() {
   const router = useRouter();

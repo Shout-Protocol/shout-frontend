@@ -1,6 +1,6 @@
-import { useWalletStore } from "@/store/wallet/wallet.type";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 import { useCometh } from "./cometh.hook";
-import { WalletType } from "@/store/wallet/wallet.store";
+import { WalletType } from "@/store/wallet/wallet.type";
 import { useMemo } from "react";
 import { useMetaMask } from "./metamask.hook";
 
@@ -32,7 +32,13 @@ export const useProvider = () => {
       default:
         return { provider: null, disconnect: () => {} };
     }
-  }, [comethProvider, comethSignOut, metaMaskDisconnect, metaMaskProvider, walletType]);
+  }, [
+    comethProvider,
+    comethSignOut,
+    metaMaskDisconnect,
+    metaMaskProvider,
+    walletType,
+  ]);
 
   return { ...set };
 };

@@ -1,6 +1,6 @@
 import { mappingChainInfo } from "@/configs/chain.config";
 import { CHAINS } from "@/constants/chian.constant";
-import { useWalletStore } from "@/store/wallet/wallet.type";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 import { isContainObjectKey } from "@/utils/object.util";
 import { Button } from "@nextui-org/react";
 import { useEffect, useMemo, useState } from "react";
@@ -24,7 +24,9 @@ export default function ChainButton({ onOpen }: IChainButtonProps) {
       <Button
         variant="bordered"
         className={`border-1 text-sm font-semibold ${
-          isContainObjectKey(CHAINS, chain?.chainId) ? "text-black" : "text-red-500"
+          isContainObjectKey(CHAINS, chain?.chainId)
+            ? "text-black"
+            : "text-red-500"
         }`}
         onPress={onOpen}
         // TODO: Add icon

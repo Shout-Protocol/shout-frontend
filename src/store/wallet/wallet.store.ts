@@ -1,16 +1,26 @@
-export enum WalletType {
-  metamask = "metamask",
-  safe = "safe",
-  cometh = "cometh",
-  none = "none",
-}
+import { create } from "zustand";
+import { IWalletState, WalletType } from "./wallet.type";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-export interface IWalletState {
-  walletType: WalletType;
-  walletAddress: string;
-  currentChainId: string;
-
-  setWalletType: (walletType: WalletType) => void;
-  setWalletAddress: (walletAddress: string) => void;
-  setCurrentChainId: (currentChain: string) => void;
-}
+export const useWalletStore = create(
+  persist<IWalletState>(
+    (set, get) => ({
+      walletType: WalletType.none,
+      walletAddress: "",
+      currentChainId: "",
+      setWalletType: (walletType: WalletType) => {
+        set({ walletType });
+      },
+      setWalletAddress: (walletAddress: string) => {
+        set({ walletAddress });
+      },
+      setCurrentChainId: (currentChainId: string) => {
+        set({ currentChainId });
+      },
+    }),
+    {
+      name: "wallet-store",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
