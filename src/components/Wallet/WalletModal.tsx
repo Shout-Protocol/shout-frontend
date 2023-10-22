@@ -39,12 +39,12 @@ export default function WalletModal({ isOpen, onOpenChange }: IWalletModal) {
           icon: "/wallet/metamask.svg",
           function: () => connect(),
         },
-        {
-          label: "Safe",
-          type: WalletType.safe,
-          icon: "/wallet/safe.svg",
-          function: () => {},
-        },
+        // {
+        //   label: "Safe",
+        //   type: WalletType.safe,
+        //   icon: "/wallet/safe.svg",
+        //   function: () => {},
+        // },
         {
           label: "Cometh",
           type: WalletType.cometh,
@@ -136,7 +136,7 @@ export default function WalletModal({ isOpen, onOpenChange }: IWalletModal) {
     if (isOpen) setIsCometh(false);
   }, [isOpen]);
   return (
-    <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={true}>
       <ModalContent className="px-3 py-8">
         {(onClose) => {
           isSuccesss && !isLoading && (onClose(), setIsSuccess(false));
