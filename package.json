@@ -22,9 +22,9 @@
     "framer-motion": "^10.16.4",
     "graphql": "^16.8.1",
     "next": "13.5.4",
+    "nft.storage": "^7.1.1",
     "react": "^18",
     "react-dom": "^18",
-    "web3.storage": "^4.5.5",
     "react-toastify": "^9.1.3",
     "zustand": "^4.4.3"
   },

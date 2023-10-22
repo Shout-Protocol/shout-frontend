@@ -9,12 +9,17 @@ import { useWalletStore } from "@/store/wallet/wallet.store";
 
 export default function CreateProfile() {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const { walletAddress } = useWalletStore();
+  const { walletAddress, setOwnerId } = useWalletStore();
 
   const { loading, error, data, refetch } = useQuery<{ profile: Profile }>(
     GET_USER,
     {
       variables: { walletAddress },
+      onCompleted: (data) => {
+        if (data.profile) {
+          setOwnerId(data.profile._id);
+        }
+      },
     }
   );
 
