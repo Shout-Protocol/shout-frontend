@@ -25,12 +25,15 @@ export default function CreateProfileModal({
   onOpenChange,
   onClose,
 }: IProps) {
-  const { walletAddress } = useWalletStore();
+  const { walletAddress, setOwnerId } = useWalletStore();
   const [username, setUsername] = useState("");
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
   const handleCreateProfile = async () => {
-    await createUser({ variables: { walletAddress, name: username } });
+    const res = await createUser({
+      variables: { walletAddress, name: username },
+    });
+    setOwnerId(res.data.createProfile._id);
     onClose();
   };
 
