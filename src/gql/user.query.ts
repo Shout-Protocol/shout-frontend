@@ -1,5 +1,17 @@
 import { gql } from "@apollo/client";
 
+export const GET_USER_BY_OWNER_ID = gql(`
+    query PostByOwnerId($ownerId: ID!) {
+        postByOwnerId(ownerId: $ownerId) {
+        ipfsHash
+        owner {
+            _id
+            walletAddress
+        }
+        }
+    }
+`);
+
 export const CREATE_USER =
   gql(`mutation CreateProfile($walletAddress: String!, $name: String!) {
     createProfile(profile: {walletAddress: $walletAddress, name: $name}) {

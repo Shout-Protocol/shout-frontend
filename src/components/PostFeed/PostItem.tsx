@@ -11,13 +11,16 @@ import { Post } from "../../../types/shoutGQL";
 import axios from "axios";
 import { truncateAddress } from "@/utils/formatString";
 import { useRouter } from "next/router";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 
 const DEFAULT_IMG_URL =
   "https://res.cloudinary.com/daily-now/image/upload/f_auto/v1/placeholders/3";
 
 export default function PostItem({ data }: { data: Post }) {
   const [imageUrl, setImageUrl] = useState(DEFAULT_IMG_URL);
+  const [description, setDescription] = useState("");
   const router = useRouter();
+  const { ownerId } = useWalletStore();
 
   const getData = useCallback(async () => {
     try {
@@ -31,6 +34,7 @@ export default function PostItem({ data }: { data: Post }) {
       console.log(metadata.image);
       if (metadata.image) {
         setImageUrl(metadata.image.replace("ipfs://", "https://ipfs.io/ipfs/"));
+        setDescription(metadata.description);
       }
     } catch (e) {
       setImageUrl(DEFAULT_IMG_URL);
@@ -67,7 +71,7 @@ export default function PostItem({ data }: { data: Post }) {
             </h1>
           </div>
         </div>
-        <p className="my-2">Hello, World !</p>
+        <p className="my-2">{description}</p>
         <div className="w-full h- relative">
           <Image
             src={imageUrl}
@@ -92,8 +96,12 @@ export default function PostItem({ data }: { data: Post }) {
             <p className="text-xs text-gray-500 bg-gray-100 p-[7.5px] rounded">
               Spark : 100
             </p>
-            <WithdrawBoost />
-            <BoostPost />
+            {data.ownerId === ownerId && (
+              <div className="flex items-center space-x-1.5">
+                <WithdrawBoost />
+                <BoostPost />
+              </div>
+            )}
           </div>
         </div>
         <hr className="mt-2" />

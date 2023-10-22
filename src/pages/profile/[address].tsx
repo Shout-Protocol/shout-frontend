@@ -5,6 +5,8 @@ import LoginNotice from "@/components/LoginNotice";
 import { useQuery } from "@apollo/client";
 import { Profile } from "../../../types/shoutGQL";
 import { GET_USER } from "@/gql/user.query";
+import PostItem from "@/components/PostFeed/PostItem";
+import { Post } from "../../../.graphclient";
 
 export default function Profile() {
   const router = useRouter();
@@ -28,6 +30,8 @@ export default function Profile() {
       </div>
     );
 
+  console.log(data?.profile.post);
+
   return (
     <>
       <div className="flex py-7 px-10 items-center border-b">
@@ -41,7 +45,12 @@ export default function Profile() {
           </p>
         </div>
       </div>
-      <div className="mt-3"></div>
+      <div className="mt-3">
+        {/* {FIXME:data can't be use properly.} */}
+        {/* {data?.profile.post?.map((item) => (
+          <PostItem key={item!._id} data={item!} />
+        ))} */}
+      </div>
     </>
   );
 }
