@@ -10,6 +10,7 @@ export default function Test() {
     variables: {
       first: pageConfig.pageSize,
       skip: 0,
+      vault: '0'
     },
   });
 

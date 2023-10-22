@@ -15,7 +15,7 @@ export default function FeedSelector({
   setSelected,
 }: IProps) {
   return (
-    <div className="space-y-3 my-3 px-5">
+    <div className="space-y-3 my-3 px-5 overflow-x-scroll">
       <hr />
       <div className="flex space-x-3">
         {feedType.map((item) => {

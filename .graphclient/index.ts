@@ -1420,6 +1420,7 @@ export type FeedQueryQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   minReports?: InputMaybe<Scalars['BigInt']>;
+  vault?: InputMaybe<Scalars['ID']>;
 }>;
 
 
@@ -1429,11 +1430,17 @@ export type FeedQueryQuery = { posts: Array<(
   )>, users: Array<(
     Pick<User, 'id'>
     & { posts?: Maybe<Array<Pick<Post, 'id'>>>, boosts?: Maybe<Array<Pick<UserBoost, 'id'>>> }
+  )>, postBoosts: Array<(
+    Pick<PostBoost, 'id' | 'amount'>
+    & { vault: Pick<YieldVault, 'id'>, post: (
+      Pick<Post, 'id' | 'ipfsHash'>
+      & { owner: Pick<User, 'id'> }
+    ) }
   )> };
 
 
 export const FeedQueryDocument = gql`
-    query FeedQuery($first: Int = 100, $skip: Int = 0, $minReports: BigInt = 0) {
+    query FeedQuery($first: Int = 100, $skip: Int = 0, $minReports: BigInt = 0, $vault: ID = 1) {
   posts(first: 5) {
     id
     owner {
@@ -1451,6 +1458,25 @@ export const FeedQueryDocument = gql`
     }
     boosts {
       id
+    }
+  }
+  postBoosts(
+    first: 10
+    orderBy: amount
+    orderDirection: desc
+    where: {vault_: {id: $vault, paused: false}}
+  ) {
+    id
+    amount
+    vault {
+      id
+    }
+    post {
+      id
+      ipfsHash
+      owner {
+        id
+      }
     }
   }
 }

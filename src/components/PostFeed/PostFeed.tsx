@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PostItem from "./PostItem";
 import FeedSelector from "./FeedSelector";
 import { FEED_TYPE_MENU } from "@/constants/menu";
 import { useQuery } from "@apollo/client";
+import { useQuery as useQueryUrql, useSubscription } from "urql";
+
 import { GET_POSTS } from "@/gql/post.query";
 import { Post } from "../../../types/shoutGQL";
 import { Spinner } from "@nextui-org/react";
+import { FeedQueryDocument } from "../../../.graphclient";
+import { pageConfig } from "@/configs/page.config";
 
 const reverseFeed = (array: any[]) => {
   let newArray = [];
@@ -22,7 +26,24 @@ export default function PostFeed() {
     pollInterval: 1500,
   });
 
-  if (loading || data === undefined)
+  const [result, executeQuery] = useQueryUrql({
+    query: FeedQueryDocument,
+    variables: {
+      first: pageConfig.pageSize,
+      skip: 0,
+      vault: FEED_TYPE_MENU[feedType],
+    },
+  });
+  const {
+    data: dataSubgraph,
+    fetching: fetchingSubgraph,
+    error: errorSubgraph,
+  } = result;
+
+  useEffect(() => {
+    executeQuery();
+  }, [feedType, executeQuery]);
+  if (loading || fetchingSubgraph || dataSubgraph === undefined)
     return (
       <div className="flex w-full items-center justify-center h-[200px] ">
         <Spinner />
@@ -36,8 +57,11 @@ export default function PostFeed() {
         setSelected={setFeedType}
         feedType={Object.keys(FEED_TYPE_MENU)}
       />
-      {reverseFeed(data.posts).map((item) => (
+      {/* {data?.posts.map((item) => (
         <PostItem key={item._id} data={item} />
+      ))} */}
+      {dataSubgraph?.postBoosts.map((item) => (
+        <PostItem key={item.id} data={item} />
       ))}
     </div>
   );

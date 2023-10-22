@@ -26,9 +26,9 @@ export default function WalletProfile() {
 
   const handleCopyAddress = async () => {
     // TODO: test sign message
-    const signer = provider?.getSigner();
-    console.log(signer);
-    console.log(await signer?.signMessage('hello'));
+    // const signer = provider?.getSigner();
+    // console.log(signer);
+    // console.log(await signer?.signMessage('hello'));
     navigator.clipboard.writeText(walletAddress);
     toast.success("Copied !!!");
   }
