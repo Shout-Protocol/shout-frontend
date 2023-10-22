@@ -9,7 +9,9 @@ import { Spinner } from "@nextui-org/react";
 
 export default function PostFeed() {
   const [feedType, setFeedType] = useState<keyof typeof FEED_TYPE_MENU>("All");
-  const { loading, error, data } = useQuery<{ posts: Post[] }>(GET_POSTS);
+  const { loading, error, data } = useQuery<{ posts: Post[] }>(GET_POSTS, {
+    pollInterval: 1500,
+  });
 
   if (loading)
     return (
