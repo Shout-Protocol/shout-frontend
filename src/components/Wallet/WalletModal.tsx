@@ -14,7 +14,6 @@ import { WalletType } from "@/store/wallet/wallet.type";
 import { useCallback, useEffect, useState } from "react";
 import { useCometh } from "@/hooks/cometh.hook";
 import { useWalletStore } from "@/store/wallet/wallet.store";
-import { useProvider } from "@/hooks/provider.hook";
 import { useMetaMask } from "@/hooks/metamask.hook";
 
 interface IWalletModal {

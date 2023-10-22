@@ -38,13 +38,7 @@ export const useProvider = () => {
       default:
         return { provider: null, disconnect: () => {} };
     }
-  }, [
-    comethProvider,
-    comethSignOut,
-    metaMaskDisconnect,
-    metaMaskProvider,
-    walletType,
-  ]);
+  }, [comethProvider, comethSignOut, metaMaskDisconnect, metaMaskProvider, resetState, walletType]);
 
   return { ...set };
 };

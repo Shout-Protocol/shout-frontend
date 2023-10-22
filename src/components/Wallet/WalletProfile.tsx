@@ -20,9 +20,15 @@ export default function WalletProfile() {
   const [isClient, setIsClient] = useState(false);
   const [balance, setBalance] = useState("0");
 
+
+
   const handleSignOut = () => disconnect();
 
-  const handleCopyAddress = () => {
+  const handleCopyAddress = async () => {
+    // TODO: test sign message
+    const signer = provider?.getSigner();
+    console.log(signer);
+    console.log(await signer?.signMessage('hello'));
     navigator.clipboard.writeText(walletAddress);
     toast.success("Copied !!!");
   }
@@ -71,8 +77,8 @@ export default function WalletProfile() {
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Action">
           <DropdownItem
-            key="sign_out"
-            onPress={() => handleCopyAddress()}
+            key="copy_address"
+            onPress={async () => await handleCopyAddress()}
           >
             Copy Address
           </DropdownItem>
