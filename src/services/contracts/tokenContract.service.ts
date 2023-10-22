@@ -36,7 +36,7 @@ const approve = async (
   contractAddress: string,
   signer: ethers.Signer,
   spender: string,
-  amount: string
+  amount: string | ethers.BigNumber
 ) => {
   const contract = tokenContract(contractAddress, signer);
   const tx = await contract.approve(spender, amount);

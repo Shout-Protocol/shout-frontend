@@ -9,28 +9,38 @@ import {
   Input,
 } from "@nextui-org/react";
 import BoostSelector from "./BoostSelector";
+import tokenContractService from "@/services/contracts/tokenContract.service";
+import { CONTRACT_ADDRESS } from "@/constants/address.constant";
+import { useProvider } from "@/hooks/provider.hook";
+import { parseEther } from "ethers/lib/utils";
+import { Signer } from "ethers";
+import { toast } from "react-toastify";
+import shouterContractService from "@/services/contracts/shouterContract.service";
 
 const mockProtocols = [
   {
-    name: "Spark Protocol",
-    description: "Stake sDAI",
+    name: "Stake sDAI",
+    description: "Spark Protocol",
     value: "spark",
     symbol: "sDAI",
     balance: 0,
+    vaultId: 1,
   },
   {
-    name: "Filecoin Network",
-    description: "Stake Fil",
+    name: "Stake Fil",
+    description: "Filcoin Netowrk",
     value: "filecoin",
     symbol: "FIL",
     balance: 0,
+    vaultId: 2,
   },
   {
-    name: "Ape Coin",
-    description: "Stake Ape",
+    name: "Stake Ape",
+    description: "Ape Coin",
     value: "ape",
     symbol: "APE",
     balance: 0,
+    vaultId: 3,
   },
 ];
 
@@ -40,7 +50,51 @@ interface IProps {
 }
 
 export default function BoostPostModal({ isOpen, onOpenChange }: IProps) {
-  const [selectedProtocol, setSelectedProtocol] = useState("");
+  const [selectedProtocol, setSelectedProtocol] = useState(
+    mockProtocols[0].value || ""
+  );
+
+  const [amount, setAmount] = useState("");
+
+  const [isApproving, setIsApproving] = useState(false);
+  const [isBoosting, setIsBoosting] = useState(false);
+
+  const { provider } = useProvider();
+
+  const handleApprove = async () => {
+    setIsApproving(true);
+    try {
+      const tx = await tokenContractService.approve(
+        CONTRACT_ADDRESS["0x5"].TestERC20,
+        provider?.getSigner() as Signer,
+        CONTRACT_ADDRESS["0x5"].Shouter,
+        parseEther(amount)
+      );
+      await tx.wait();
+      toast.success("Approve successfully");
+    } catch (err) {
+      console.log(err);
+    }
+    setIsApproving(false);
+  };
+
+  const handleBoost = async () => {
+    setIsBoosting(true);
+    try {
+      const tx = await shouterContractService.createAndBoostPost(
+        CONTRACT_ADDRESS["0x5"].Shouter,
+        provider?.getSigner() as Signer,
+        "ipfshash",
+        parseEther(amount),
+        1
+      );
+      await tx.wait();
+      toast.success("Boost successfully");
+    } catch (err) {
+      console.log(err);
+    }
+    setIsBoosting(false);
+  };
 
   return (
     <Modal
@@ -62,19 +116,32 @@ export default function BoostPostModal({ isOpen, onOpenChange }: IProps) {
                 setSelectedProtocol={setSelectedProtocol}
                 protocols={mockProtocols}
               />
-              <div className="mb-3">
-                <p className="mb-0.5 text-gray-500">Amount to Stake:</p>
-                <Input
-                  size={"lg"}
-                  type="number"
-                  placeholder="Enter your desired amount to stake"
-                />
-              </div>
+              <div className="mb-1" />
             </ModalBody>
 
-            <ModalFooter className="border-t flex justify-between items-center">
-              <div className="flex items-center space-x-2 w-full justify-end">
-                <Button color="primary">Boost</Button>
+            <ModalFooter className="border-t flex flex-col justify-start">
+              <p className="mb-0.5 text-gray-500">Amount to Stake:</p>
+              <div className="flex items-center space-x-2 w-full">
+                <div className="flex items-center space-x-3 w-full">
+                  <Input
+                    className="w-full"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    size={"lg"}
+                    type="number"
+                    placeholder="Enter amount to stake"
+                  />
+                  <Button
+                    isLoading={isApproving}
+                    onClick={handleApprove}
+                    color="primary"
+                  >
+                    Approve
+                  </Button>
+                  <Button onClick={handleBoost} color="primary">
+                    Boost
+                  </Button>
+                </div>
               </div>
             </ModalFooter>
           </>

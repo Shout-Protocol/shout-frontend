@@ -12,8 +12,8 @@ const createAndBoostPost = async (
   contractAddress: string,
   provider: ethers.Signer | ethers.providers.Provider,
   _ipfsHash: string,
-  _yieldVaultId: number,
-  _amount: number
+  _yieldVaultId: number | ethers.BigNumber,
+  _amount: number | ethers.BigNumber
 ) => {
   const contract = shouterContract(contractAddress, provider);
   const tx = await contract.createAndBoostPost();
