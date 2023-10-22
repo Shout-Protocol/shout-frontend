@@ -12,6 +12,7 @@ import {
 import { formatEther } from "ethers/lib/utils";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function WalletProfile() {
   const { walletAddress, walletType } = useWalletStore();
@@ -20,6 +21,12 @@ export default function WalletProfile() {
   const [balance, setBalance] = useState("0");
 
   const handleSignOut = () => disconnect();
+
+  const handleCopyAddress = () => {
+    navigator.clipboard.writeText(walletAddress);
+    toast.success("Copied !!!");
+  }
+
   useEffect(() => {
     const getBalance = async () => {
       if (provider) {
@@ -63,6 +70,12 @@ export default function WalletProfile() {
           </div>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Action">
+          <DropdownItem
+            key="sign_out"
+            onPress={() => handleCopyAddress()}
+          >
+            Copy Address
+          </DropdownItem>
           <DropdownItem
             key="sign_out"
             className="text-danger"
