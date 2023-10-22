@@ -1,9 +1,16 @@
 import { CHAINS } from "@/constants/chian.constant";
 
 interface Chain {
-  name: string;
+  chainName: string;
   chainId: string;
+  rpcUrls: string[];
   iconPath: string;
+  nativeCurrency: {
+    name: string;
+    symbol: string;
+    decimals: number;
+  };
+  blockExplorerUrls?: string[];
 }
 
 interface ChainMap {

@@ -35,7 +35,7 @@ export const ChainModal = ({ isOpen, onOpenChange }: IChainModalProps) => {
         return (
           <Button
             key={chain.chainId}
-            className={`flex justify-between items-center space-x-3 py-3 rounded-md ${
+            className={`flex justify-between items-center space-x-3 py-6 rounded-md ${
               chain.chainId === currentChainId
                 ? "bg-fuchsia-400 text-white"
                 : "bg-white hover:bg-slate-100"
@@ -46,21 +46,21 @@ export const ChainModal = ({ isOpen, onOpenChange }: IChainModalProps) => {
               onClose();
             }}
           >
-            <div className="flex">
+            <div className="flex space-x-3 items-center">
               <Image
                 src={chain.iconPath}
-                alt={chain.name}
-                width={20}
-                height={20}
+                alt={chain.chainName}
+                width={30}
+                height={30}
               />
-              <p className="font-semibold">{chain.name}</p>
+              <p className="font-semibold">{chain.chainName}</p>
             </div>
             {chain.chainId === currentChainId && <div>Connected</div>}
           </Button>
         );
       });
     },
-    [chainFilter, currentChainId]
+    [chainFilter, changeChain, currentChainId]
   );
 
   return (
