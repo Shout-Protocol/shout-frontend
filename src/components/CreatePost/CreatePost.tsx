@@ -1,9 +1,20 @@
 import React from "react";
 import { Avatar, useDisclosure } from "@nextui-org/react";
 import CreatePostModal from "./CreatePostModal";
+import LoginNotice from "../LoginNotice";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 
 export default function CreatePost() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const { ownerId } = useWalletStore();
+
+  if (!ownerId)
+    return (
+      <div className="pt-3 px-4">
+        <LoginNotice />
+      </div>
+    );
 
   return (
     <div className="w-full flex flex-col p-3">

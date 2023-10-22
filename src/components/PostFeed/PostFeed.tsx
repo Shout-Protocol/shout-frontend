@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CreatePost from "../CreatePost/CreatePost";
 import PostItem from "./PostItem";
 import FeedSelector from "./FeedSelector";
 import { FEED_TYPE_MENU } from "@/constants/menu";

@@ -1,7 +1,18 @@
+import LoginNotice from "@/components/LoginNotice";
 import NotificationItem from "@/components/NotificationItem";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 import React from "react";
 
 export default function Notifications() {
+  const { ownerId } = useWalletStore();
+
+  if (!ownerId)
+    return (
+      <div className="pt-3 px-4">
+        <LoginNotice />
+      </div>
+    );
+
   return (
     <>
       <div className="p-3 border-b">
