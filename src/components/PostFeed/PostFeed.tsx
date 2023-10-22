@@ -4,7 +4,8 @@ import FeedSelector from "./FeedSelector";
 import { FEED_TYPE_MENU } from "@/constants/menu";
 
 export default function PostFeed() {
-  const [feedType, setFeedType] = useState<keyof typeof FEED_TYPE_MENU>("All");
+  const [feedType, setFeedType] =
+    useState<keyof typeof FEED_TYPE_MENU>("Spark");
 
   return (
     <div>

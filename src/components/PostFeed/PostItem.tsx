@@ -7,6 +7,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "@nextui-org/react";
 import BoostPost from "../BoostPost/BoostPost";
+import WithdrawBoost from "../BoostPost/WithdrawBoost";
 
 export default function PostItem() {
   return (
@@ -49,6 +50,7 @@ export default function PostItem() {
             <p className="text-xs text-gray-500 bg-gray-100 p-[7.5px] rounded">
               Spark : 100
             </p>
+            <WithdrawBoost />
             <BoostPost />
           </div>
         </div>
