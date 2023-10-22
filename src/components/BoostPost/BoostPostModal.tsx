@@ -47,12 +47,19 @@ const mockProtocols = [
 interface IProps {
   isOpen: boolean;
   onOpenChange: (value: boolean) => void;
+  ipfsHash: string;
 }
 
-export default function BoostPostModal({ isOpen, onOpenChange }: IProps) {
+export default function BoostPostModal({
+  isOpen,
+  onOpenChange,
+  ipfsHash,
+}: IProps) {
   const [selectedProtocol, setSelectedProtocol] = useState(
     mockProtocols[0].value || ""
   );
+
+  console.log(ipfsHash);
 
   const [amount, setAmount] = useState("");
 
@@ -80,11 +87,18 @@ export default function BoostPostModal({ isOpen, onOpenChange }: IProps) {
 
   const handleBoost = async () => {
     setIsBoosting(true);
+    console.log(
+      CONTRACT_ADDRESS["0x5"].Shouter,
+      provider?.getSigner() as Signer,
+      ipfsHash,
+      parseEther(amount),
+      1
+    );
     try {
       const tx = await shouterContractService.createAndBoostPost(
         CONTRACT_ADDRESS["0x5"].Shouter,
         provider?.getSigner() as Signer,
-        "ipfshash",
+        ipfsHash,
         parseEther(amount),
         1
       );
@@ -138,7 +152,11 @@ export default function BoostPostModal({ isOpen, onOpenChange }: IProps) {
                   >
                     Approve
                   </Button>
-                  <Button onClick={handleBoost} color="primary">
+                  <Button
+                    isLoading={isBoosting}
+                    onClick={handleBoost}
+                    color="primary"
+                  >
                     Boost
                   </Button>
                 </div>

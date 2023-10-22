@@ -91,15 +91,15 @@ export default function PostItem({ data }: { data: Post }) {
           </div>
           <div className="flex items-center space-x-2">
             <p className="text-xs text-gray-500 bg-gray-100 p-[7.5px] rounded">
-              FileCoin : 50
+              FileCoin : 0
             </p>
             <p className="text-xs text-gray-500 bg-gray-100 p-[7.5px] rounded">
-              Spark : 100
+              Spark : 0
             </p>
             {data.ownerId === ownerId && (
               <div className="flex items-center space-x-1.5">
                 <WithdrawBoost />
-                <BoostPost />
+                <BoostPost ipfsHash={data.ipfsHash} />
               </div>
             )}
           </div>

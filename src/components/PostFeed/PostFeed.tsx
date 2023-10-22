@@ -13,7 +13,7 @@ export default function PostFeed() {
 
   if (loading)
     return (
-      <div className="flex w-full items-center justify-center h-[200px]">
+      <div className="flex w-full items-center justify-center h-[200px] ">
         <Spinner />
       </div>
     );
