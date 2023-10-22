@@ -12,16 +12,12 @@ const shouterContract = (
 const createAndBoostPost = async (
   contractAddress: string,
   provider: ethers.Signer | ethers.providers.Provider,
-  _ipfsHash: string,
-  _yieldVaultId: number | ethers.BigNumber,
-  _amount: number | ethers.BigNumber
+  ipfsHash: string,
+  yieldVaultId: number | ethers.BigNumber,
+  amount: number | ethers.BigNumber
 ) => {
-  const contract = shouterContract(CONTRACT_ADDRESS["0x5"].Shouter, provider);
-  const tx = await contract.createAndBoostPost(
-    _ipfsHash,
-    _yieldVaultId,
-    _amount
-  );
+  const contract = shouterContract(contractAddress, provider);
+  const tx = await contract.createAndBoostPost(ipfsHash, yieldVaultId, amount);
   await tx.wait();
   return tx;
 };

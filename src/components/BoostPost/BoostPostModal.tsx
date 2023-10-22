@@ -99,8 +99,8 @@ export default function BoostPostModal({
         CONTRACT_ADDRESS["0x5"].Shouter,
         provider?.getSigner() as Signer,
         ipfsHash,
-        parseEther(amount),
-        1
+        1,
+        parseEther(amount)
       );
       await tx.wait();
       toast.success("Boost successfully");
