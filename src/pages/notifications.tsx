@@ -18,7 +18,10 @@ export default function Notifications() {
       <div className="p-3 border-b">
         <p className="text-xl font-semibold">Notifications</p>
       </div>
-      <NotificationItem
+      <div className="flex justify-center items-center w-full h-[100px]">
+        <p>You are all catch up :)</p>
+      </div>
+      {/* <NotificationItem
         name="Spark Protocol"
         time="A moment ago"
         message="Someone has just boosted a post on spark protocol !"
@@ -32,7 +35,7 @@ export default function Notifications() {
         name="Spark Protocol"
         time="A moment ago"
         message="Someone has just boosted a post on spark protocol !"
-      />
+      /> */}
     </>
   );
 }
