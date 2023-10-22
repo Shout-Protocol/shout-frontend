@@ -4,6 +4,7 @@ import { useWalletStore } from "@/store/wallet/wallet.store";
 import { isContainObjectKey } from "@/utils/object.util";
 import { Button } from "@nextui-org/react";
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 
 interface IChainButtonProps {
   onOpen: () => void;
@@ -29,12 +30,20 @@ export default function ChainButton({ onOpen }: IChainButtonProps) {
             : "text-red-500"
         }`}
         onPress={onOpen}
-        // TODO: Add icon
-        // startContent={<Image src={chain.iconPath} alt={chain.name} width={20} height={20} />}
       >
-        {isContainObjectKey(CHAINS, chain?.chainId)
-          ? chain?.name
-          : "Wrong Network"}
+        {isContainObjectKey(CHAINS, chain?.chainId) ? (
+          <div className="flex space-x-2">
+            <Image
+              src={chain.iconPath}
+              alt={chain.chainName}
+              width={20}
+              height={20}
+            />
+            <p>{chain?.chainName}</p>
+          </div>
+        ) : (
+          "Wrong Network"
+        )}
       </Button>
     );
   }

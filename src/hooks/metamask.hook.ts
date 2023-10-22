@@ -2,7 +2,8 @@ import { WalletType } from "@/store/wallet/wallet.type";
 import { useWalletStore } from "@/store/wallet/wallet.store";
 import { useSDK } from "@metamask/sdk-react";
 import { ethers } from "ethers";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { CHAINS } from "@/constants/chian.constant";
 
 export const useMetaMask = () => {
   const { sdk, connected, connecting, provider: publicProvider } = useSDK();
@@ -38,15 +39,26 @@ export const useMetaMask = () => {
   };
 
   const changeChain = async (chainId: string) => {
-    try {
-      if (window.ethereum) {
+    if (window.ethereum) {
+      try {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId: chainId }],
         });
+        console.log("Changed chain", chainId);
+        setChainId(chainId || "");
+        setCurrentChainId(chainId || "");
+      } catch (e) {
+        console.warn("Failed to change chain:", e);
+        const { iconPath, ...chainParams } =
+          CHAINS[chainId as keyof typeof CHAINS];
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{ ...chainParams }],
+        });
+        setChainId(chainId || "");
+        setCurrentChainId(chainId || "");
       }
-    } catch (e) {
-      console.warn("Failed to change chain:", e);
     }
   };
 
