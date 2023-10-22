@@ -1,5 +1,13 @@
 import { gql } from "@apollo/client";
 
+export const CREATE_POST = gql(`
+  mutation CreatePost($ipfsHash: String!, $ownerId: ID!) {
+    createPost(ipfsHash: $ipfsHash, ownerId: $ownerId) {
+        _id
+    }
+  }
+`);
+
 export const GET_POSTS = gql(`
   query Posts {
     posts {

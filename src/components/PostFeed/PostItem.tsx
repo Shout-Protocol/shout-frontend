@@ -23,14 +23,16 @@ export default function PostItem() {
           </div>
         </div>
         <p className="my-2">Hello, World !</p>
-        <div className="w-full h-[500px] relative">
+        <div className="w-full h- relative">
           <Image
-            className="rounded-md"
-            alt="thumbnail"
             src={
               "https://res.cloudinary.com/daily-now/image/upload/f_auto/v1/placeholders/3"
             }
-            layout="fill"
+            width={700}
+            height={300}
+            objectFit="cover"
+            alt="post-img"
+            className="rounded-md"
           />
         </div>
         <div className="w-full flex items-center justify-between mt-2">
