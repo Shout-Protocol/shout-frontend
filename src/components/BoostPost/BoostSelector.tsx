@@ -3,6 +3,7 @@ import { RadioGroup } from "@nextui-org/react";
 import { BoostSelectItem } from "./BoostSelectItem";
 
 interface IProps {
+  label: string;
   selectedProtocol: string;
   setSelectedProtocol: (value: string) => void;
   protocols: {
@@ -14,6 +15,7 @@ interface IProps {
 }
 
 export default function BoostSelector({
+  label,
   protocols,
   selectedProtocol,
   setSelectedProtocol,
@@ -22,15 +24,13 @@ export default function BoostSelector({
     <RadioGroup
       value={selectedProtocol}
       onValueChange={setSelectedProtocol}
-      label="Choose a protocol to boost with:"
+      label={label}
     >
-      {/* <div className="w-full flex items-center justify-start space-x-3"> */}
       {protocols.map((protocol, index) => (
         <BoostSelectItem key={index} {...protocol}>
           <p>{protocol.name}</p>
         </BoostSelectItem>
       ))}
-      {/* </div> */}
     </RadioGroup>
   );
 }

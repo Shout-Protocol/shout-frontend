@@ -1,0 +1,21 @@
+query FeedQuery($first: Int = 100, $skip: Int = 0, $minReports: BigInt = 0) {
+  posts(first: 5) {
+    id
+    owner {
+      id
+    }
+    ipfsHash
+    boosts {
+      id
+    }
+  }
+  users(first: 5) {
+    id
+    posts {
+      id
+    }
+    boosts {
+      id
+    }
+  }
+}

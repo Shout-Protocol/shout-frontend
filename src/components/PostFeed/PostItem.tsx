@@ -4,33 +4,82 @@ import {
 } from "@heroicons/react/24/outline";
 import { Avatar } from "@nextui-org/react";
 import Image from "next/image";
-import React from "react";
-import { Button } from "@nextui-org/react";
+import React, { useCallback, useState } from "react";
 import BoostPost from "../BoostPost/BoostPost";
+import WithdrawBoost from "../BoostPost/WithdrawBoost";
+import { Post } from "../../../types/shoutGQL";
+import axios from "axios";
+import { truncateAddress } from "@/utils/formatString";
+import { useRouter } from "next/router";
+import { useWalletStore } from "@/store/wallet/wallet.store";
 
-export default function PostItem() {
+const DEFAULT_IMG_URL =
+  "https://res.cloudinary.com/daily-now/image/upload/f_auto/v1/placeholders/3";
+
+export default function PostItem({ data }: { data: Post }) {
+  const [imageUrl, setImageUrl] = useState(DEFAULT_IMG_URL);
+  const [description, setDescription] = useState("");
+  const router = useRouter();
+  const { ownerId } = useWalletStore();
+
+  const getData = useCallback(async () => {
+    try {
+      const metadata: {
+        name: string;
+        description: string;
+        image: string;
+      } = await axios
+        .get(`https://${data.ipfsHash}.ipfs.dweb.link/metadata.json`)
+        .then((res) => res.data);
+      console.log(metadata.image);
+      if (metadata.image) {
+        setImageUrl(metadata.image.replace("ipfs://", "https://ipfs.io/ipfs/"));
+        setDescription(metadata.description);
+      }
+    } catch (e) {
+      setImageUrl(DEFAULT_IMG_URL);
+      console.error("Error fetch nft data", e);
+    }
+  }, [data.ipfsHash]);
+
+  React.useEffect(() => {
+    getData();
+  }, [getData]);
+
   return (
     <>
       <div className="p-3 pt-0.5">
         <div className="flex items-center">
-          <Avatar className="mr-2 text-white bg-gray-300 w-10 h-10" />
+          <Avatar
+            onClick={() => router.push(`/profile/${data.owner?.walletAddress}`)}
+            className="mr-2 text-white bg-gray-300 w-10 h-10 cursor-pointer"
+          />
           <div className="flex flex-col">
             <div className="flex items-center">
               <p className="text-gray-500">1h</p>
-              <p className="text-gray-500 ml-2">@satosheep</p>
+              <p
+                onClick={() =>
+                  router.push(`/profile/${data.owner?.walletAddress}`)
+                }
+                className="text-gray-500 ml-2  cursor-pointer"
+              >
+                @{data.owner?.name}
+              </p>
             </div>
-            <h1 className="font-semibold text-md">0x123..abc</h1>
+            <h1 className="font-semibold text-md">
+              {truncateAddress(data.owner?.walletAddress as string)}
+            </h1>
           </div>
         </div>
-        <p className="my-2">Hello, World !</p>
-        <div className="w-full h-[500px] relative">
+        <p className="my-2">{description}</p>
+        <div className="w-full h- relative">
           <Image
+            src={imageUrl}
+            width={700}
+            height={300}
+            objectFit="cover"
+            alt="post-img"
             className="rounded-md"
-            alt="thumbnail"
-            src={
-              "https://res.cloudinary.com/daily-now/image/upload/f_auto/v1/placeholders/3"
-            }
-            layout="fill"
           />
         </div>
         <div className="w-full flex items-center justify-between mt-2">
@@ -47,7 +96,12 @@ export default function PostItem() {
             <p className="text-xs text-gray-500 bg-gray-100 p-[7.5px] rounded">
               Spark : 100
             </p>
-            <BoostPost />
+            {data.ownerId === ownerId && (
+              <div className="flex items-center space-x-1.5">
+                <WithdrawBoost />
+                <BoostPost />
+              </div>
+            )}
           </div>
         </div>
         <hr className="mt-2" />
