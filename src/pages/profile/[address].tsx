@@ -48,7 +48,7 @@ export default function Profile() {
       <div className="mt-3">
         {/* {FIXME:data can't be use properly.} */}
         {data?.profile.post?.map((item) => (
-          <PostItem key={item!._id} data={item!} hideHeader={true} />
+          <PostItem key={item!._id} data={item as any} hideHeader={true} />
         ))}
       </div>
     </>
